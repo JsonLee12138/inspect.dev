@@ -1,6 +1,6 @@
 # Inspect.dev 学习版
 
-[English Document]([./README.md](https://github.com/JsonLee12138/inspect.dev/blob/main/README.en.md))
+[English Document](https://github.com/JsonLee12138/inspect.dev/blob/main/README.en.md)
 
 当前项目仅供学习使用，请勿用于商业用途, 请支持正版[Inspect.dev](https://inspect.dev/)。
 
