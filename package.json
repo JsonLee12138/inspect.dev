@@ -5,8 +5,9 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "extract:asar": "node ./cmd/index.js -a ./asar/app.asar -o ./src",
-    "build:mac": "electron-builder --mac",
-    "build:win": "electron-builder --win",
+    "install-dep": "node ./cmd/installDependencies.js",
+    "build:mac": "node ./cmd/build.js --mac",
+    "build:win": "node ./cmd/build.js --win",
     "dev": "electron ./src"
   },
   "keywords": [],
@@ -18,39 +19,20 @@
   "type": "commonjs",
   "description": "",
   "dependencies": {
-    "@electron/asar": "^3.2.18",
     "commander": "^13.0.0",
-    "@inspect/ios-adaptor": "file:src/packages/inspect-ios-adaptor",
-    "@electron-toolkit/preload": "^2.0.0",
-    "@todesktop/runtime": "^1.6.1",
-    "electron-is-dev": "^1.2.0",
-    "electron-log": "^5.0.3",
-    "electron-store": "^7.0.2",
-    "electron-updater": "^4.3.8",
-    "fix-path": "^4.0.0",
-    "ms": "^2.1.2",
-    "node-fetch": "^3.3.2",
-    "node-machine-id": "^1.1.12",
-    "os-name": "^6.0.0",
-    "posthog-node": "^3.5.0",
-    "re-resizable": "^6.9.0",
-    "react": "^18.2.0",
-    "react-albus-react18": "^2.0.1",
-    "react-dom": "^18.2.0",
-    "react-overlays": "^5.2.1",
-    "react-use-intercom": "^1.1.9",
-    "styled-components": "^6.1.1",
-    "ws": "^8.5.0"
+    "inquirer": "^12.4.2"
   },
   "devDependencies": {
-    "electron": "^33.3.1",
+    "electron": "^33.4.1",
     "electron-builder": "^25.1.8"
   },
   "build": {
     "files": [
       "src/**/*",
-      "packages/**/*",
-      "builderStaticFiles/**/*"
+      "!node_modules/**/*",
+      "!dist",
+      "!pnpm-lock.yaml",
+      "!.gitignore"
     ],
     "mac": {
       "target": "dmg"

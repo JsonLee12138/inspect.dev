@@ -8429,20 +8429,20 @@ const darwinMenu = () => {
       {
         type: "separator"
       },
-      {
-        label: "Preferences",
-        accelerator: getAccelerator(),
-        click() {
-          execCommand("inspect:openAccount");
-        }
-      },
-      {
-        label: "Log out",
-        accelerator: getAccelerator(),
-        click() {
-          execCommand("inspect:logOut");
-        }
-      },
+      // {
+      //   label: "Preferences",
+      //   accelerator: getAccelerator(),
+      //   click() {
+      //     execCommand("inspect:openAccount");
+      //   }
+      // },
+      // {
+      //   label: "Log out",
+      //   accelerator: getAccelerator(),
+      //   click() {
+      //     execCommand("inspect:logOut");
+      //   }
+      // },
       {
         label: "Open log files",
         accelerator: getAccelerator(),
@@ -8602,7 +8602,7 @@ class WindowManager {
       this.mainWindow.loadFile(require$$0$1.join(__dirname, "../renderer/index.html"));
     }
     this.subscribeToWindow();
-    this.registerInspectProtocol();
+    // this.registerInspectProtocol();
     this.makeMenu();
     return this.mainWindow;
   }
@@ -8673,38 +8673,38 @@ class WindowManager {
     if (!electron.app.isDefaultProtocolClient("inspect")) {
       electron.app.setAsDefaultProtocolClient("inspect");
     }
-    let handleInvoked = async (passedValue) => {
-      try {
-        let url2 = new URL(passedValue);
-        let token = url2.searchParams.get("token");
-        let refreshToken = url2.searchParams.get("refreshToken");
-        await execCommand("inspect:storeAuthenticationTokens", token, refreshToken);
-      } catch (error2) {
-        logger$1.error("registerInspectProtocol.handleInvoked.error", error2);
-      }
-    };
-    const gotTheLock = electron.app.requestSingleInstanceLock();
-    if (!gotTheLock) {
-      electron.app.quit();
-      return;
-    } else {
-      electron.app.on("second-instance", async (e2, argv) => {
-        if (process.platform !== "darwin") {
-          let protocolValue = argv.find((arg) => arg.startsWith("inspect://"));
-          await handleInvoked(protocolValue);
-        }
-        if (this.mainWindow) {
-          if (this.mainWindow.isMinimized()) {
-            this.mainWindow.restore();
-          }
-          this.mainWindow.focus();
-        }
-      });
-    }
-    electron.app.on("open-url", async function(e2, data) {
-      e2.preventDefault();
-      await handleInvoked(data);
-    });
+    // let handleInvoked = async (passedValue) => {
+    //   try {
+    //     let url2 = new URL(passedValue);
+    //     let token = url2.searchParams.get("token");
+    //     let refreshToken = url2.searchParams.get("refreshToken");
+    //     await execCommand("inspect:storeAuthenticationTokens", token, refreshToken);
+    //   } catch (error2) {
+    //     logger$1.error("registerInspectProtocol.handleInvoked.error", error2);
+    //   }
+    // };
+    // const gotTheLock = electron.app.requestSingleInstanceLock();
+    // if (!gotTheLock) {
+    //   electron.app.quit();
+    //   return;
+    // } else {
+    //   electron.app.on("second-instance", async (e2, argv) => {
+    //     if (process.platform !== "darwin") {
+    //       let protocolValue = argv.find((arg) => arg.startsWith("inspect://"));
+    //       await handleInvoked(protocolValue);
+    //     }
+    //     if (this.mainWindow) {
+    //       if (this.mainWindow.isMinimized()) {
+    //         this.mainWindow.restore();
+    //       }
+    //       this.mainWindow.focus();
+    //     }
+    //   });
+    // }
+    // electron.app.on("open-url", async function(e2, data) {
+    //   e2.preventDefault();
+    //   await handleInvoked(data);
+    // });
   }
 }
 var execa$2 = { exports: {} };
